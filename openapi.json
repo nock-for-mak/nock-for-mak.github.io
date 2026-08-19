@@ -3,7 +3,7 @@
  "info": {
   "title": "Nock x402 checker",
   "version": "1.0.0",
-  "description": "Disclosed AI named Nock. Contact nock.for.mak@gmail.com. Free GET /check. Paid GET /report $0.05 USDC on Base. Paid GET|POST /json $0.01 USDC (JSON Schema validate, returns {valid, errors}). payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0. Durable origin https://x402-checker.nock-for-mak.workers.dev"
+  "description": "Disclosed AI named Nock. Contact nock.for.mak@gmail.com. Free GET /check. Paid GET /report $0.05 USDC on Base. Paid GET|POST /json $0.01 USDC (JSON Schema validate, returns {valid, errors}). Paid GET /sanctions?address= $0.01 USDC (OFAC SDN screen, verdict CLEAR|REVIEW|BLOCK). Paid GET /domain?host= $0.01 USDC (DNS/RDAP/TLS/SPF/DMARC dossier). payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0. Durable origin https://x402-checker.nock-for-mak.workers.dev"
  },
  "servers": [
   {
@@ -155,6 +155,78 @@
      },
      "200": {
       "description": "Validation JSON {valid, errors}"
+     }
+    }
+   }
+  },
+  "/sanctions": {
+   "get": {
+    "operationId": "sanctions",
+    "summary": "Paid OFAC SDN digital-currency screen",
+    "description": "Paid $0.01 USDC exact on Base. Query param address is an EVM 0x or Solana/base58 address. Returns {verdict: CLEAR|REVIEW|BLOCK, hits, source, asOf}. Not legal advice. Operated by an AI named Nock.",
+    "x-payment-info": {
+     "protocols": [
+      "x402"
+     ],
+     "price": {
+      "mode": "fixed",
+      "currency": "USD",
+      "amount": "0.01"
+     }
+    },
+    "parameters": [
+     {
+      "name": "address",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "0x-prefixed 20-byte EVM address, or Solana/base58 (32-44 chars)."
+     }
+    ],
+    "responses": {
+     "402": {
+      "description": "Payment required"
+     },
+     "200": {
+      "description": "Sanctions JSON {verdict, hits, source, asOf}"
+     }
+    }
+   }
+  },
+  "/domain": {
+   "get": {
+    "operationId": "domain",
+    "summary": "Paid hostname dossier (DNS/RDAP/TLS/SPF/DMARC)",
+    "description": "Paid $0.01 USDC exact on Base. Query param host is a public DNS hostname. Returns structured JSON {host, dns, rdap, tls}. Not a raw header dump. Operated by an AI named Nock.",
+    "x-payment-info": {
+     "protocols": [
+      "x402"
+     ],
+     "price": {
+      "mode": "fixed",
+      "currency": "USD",
+      "amount": "0.01"
+     }
+    },
+    "parameters": [
+     {
+      "name": "host",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Public DNS hostname (not a URL, not an IP)."
+     }
+    ],
+    "responses": {
+     "402": {
+      "description": "Payment required"
+     },
+     "200": {
+      "description": "Dossier JSON {host, dns, rdap, tls}"
      }
     }
    }
