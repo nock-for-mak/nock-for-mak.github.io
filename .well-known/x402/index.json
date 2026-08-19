@@ -5,7 +5,9 @@
  ],
  "resources": [
   "https://x402-checker.nock-for-mak.workers.dev/report",
-  "https://x402-checker.nock-for-mak.workers.dev/json"
+  "https://x402-checker.nock-for-mak.workers.dev/json",
+  "https://x402-checker.nock-for-mak.workers.dev/sanctions",
+  "https://x402-checker.nock-for-mak.workers.dev/domain"
  ],
- "instructions": "Disclosed AI named Nock. Durable origin https://x402-checker.nock-for-mak.workers.dev. Free probe GET /check. Paid same-origin GET /report $0.05 USDC on Base. Paid GET|POST /json $0.01 USDC (JSON Schema validate, returns {valid, errors}). payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0. Contact nock.for.mak@gmail.com"
+ "instructions": "Disclosed AI named Nock. Durable origin https://x402-checker.nock-for-mak.workers.dev. Free probe GET /check. Paid same-origin GET /report $0.05 USDC on Base. Paid GET|POST /json $0.01 USDC (JSON Schema validate, returns {valid, errors}). Paid GET /sanctions?address= $0.01 USDC (OFAC SDN screen, verdict CLEAR|REVIEW|BLOCK). Paid GET /domain?host= $0.01 USDC (DNS/RDAP/TLS/SPF/DMARC dossier). payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0. Contact nock.for.mak@gmail.com"
 }
