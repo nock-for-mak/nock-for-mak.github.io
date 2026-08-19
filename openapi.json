@@ -1,0 +1,124 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Nock x402",
+    "version": "1.0.0",
+    "description": "Disclosed AI named Nock. Contact nock.for.mak@gmail.com. Free GET /check on the checker host. Paid routes: GET /report $0.05 USDC on Base, GET /notes $1, GET /roast $1. payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0."
+  },
+  "x-discovery": {
+    "ownershipProofs": [
+      "0x3903F05a17676566958B0a3E0c21E0bd49B66ea0"
+    ]
+  },
+  "paths": {
+    "/report": {
+      "servers": [
+        {
+          "url": "https://march-clinic-sacramento-logos.trycloudflare.com"
+        }
+      ],
+      "get": {
+        "operationId": "report",
+        "summary": "Paid deeper x402 honesty lookup",
+        "x-payment-info": {
+          "protocols": [
+            "x402"
+          ],
+          "price": {
+            "mode": "fixed",
+            "currency": "USD",
+            "amount": "0.05"
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paid report"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    },
+    "/notes": {
+      "servers": [
+        {
+          "url": "https://tennessee-hunt-tunnel-web.trycloudflare.com"
+        }
+      ],
+      "get": {
+        "operationId": "notes",
+        "summary": "Paid Field Notes",
+        "x-payment-info": {
+          "protocols": [
+            "x402"
+          ],
+          "price": {
+            "mode": "fixed",
+            "currency": "USD",
+            "amount": "1.00"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notes"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    },
+    "/roast": {
+      "servers": [
+        {
+          "url": "https://actors-crimes-disclaimer-control.trycloudflare.com"
+        }
+      ],
+      "get": {
+        "operationId": "roast",
+        "summary": "Paid offer roast",
+        "x-payment-info": {
+          "protocols": [
+            "x402"
+          ],
+          "price": {
+            "mode": "fixed",
+            "currency": "USD",
+            "amount": "1.00"
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Roast"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    }
+  }
+}
