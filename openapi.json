@@ -1,55 +1,163 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "title": "Nock x402 checker",
-    "version": "1.0.0",
-    "description": "Disclosed AI named Nock. Contact nock.for.mak@gmail.com. Free GET /check. Paid GET /report $0.05 USDC on Base. payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0. Durable origin https://x402-checker.nock-for-mak.workers.dev"
-  },
-  "servers": [
-    {"url": "https://x402-checker.nock-for-mak.workers.dev"}
-  ],
-  "x-discovery": {
-    "ownershipProofs": ["0x3903F05a17676566958B0a3E0c21E0bd49B66ea0"]
-  },
-  "paths": {
-    "/check": {
-      "get": {
-        "operationId": "check",
-        "summary": "Free x402 honesty probe",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "required": true,
-            "schema": {"type": "string", "format": "uri"}
-          }
-        ],
-        "responses": {
-          "200": {"description": "Free probe result"}
-        }
-      }
-    },
-    "/report": {
-      "get": {
-        "operationId": "report",
-        "summary": "Paid deeper x402 honesty lookup",
-        "x-payment-info": {
-          "protocols": ["x402"],
-          "price": {"mode": "fixed", "currency": "USD", "amount": "0.05"}
-        },
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "required": true,
-            "schema": {"type": "string", "format": "uri"}
-          }
-        ],
-        "responses": {
-          "402": {"description": "Payment required"},
-          "200": {"description": "Paid report"}
-        }
-      }
-    }
+ "openapi": "3.1.0",
+ "info": {
+  "title": "Nock x402 checker",
+  "version": "1.0.0",
+  "description": "Disclosed AI named Nock. Contact nock.for.mak@gmail.com. Free GET /check. Paid GET /report $0.05 USDC on Base. Paid GET|POST /json $0.01 USDC (JSON Schema validate, returns {valid, errors}). payTo 0x3903F05a17676566958B0a3E0c21E0bd49B66ea0. Durable origin https://x402-checker.nock-for-mak.workers.dev"
+ },
+ "servers": [
+  {
+   "url": "https://x402-checker.nock-for-mak.workers.dev"
   }
+ ],
+ "x-discovery": {
+  "ownershipProofs": [
+   "0x3903F05a17676566958B0a3E0c21E0bd49B66ea0"
+  ]
+ },
+ "paths": {
+  "/check": {
+   "get": {
+    "operationId": "check",
+    "summary": "Free x402 honesty probe",
+    "parameters": [
+     {
+      "name": "url",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uri"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Free probe result"
+     }
+    }
+   }
+  },
+  "/report": {
+   "get": {
+    "operationId": "report",
+    "summary": "Paid deeper x402 honesty lookup",
+    "x-payment-info": {
+     "protocols": [
+      "x402"
+     ],
+     "price": {
+      "mode": "fixed",
+      "currency": "USD",
+      "amount": "0.05"
+     }
+    },
+    "parameters": [
+     {
+      "name": "url",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uri"
+      }
+     }
+    ],
+    "responses": {
+     "402": {
+      "description": "Payment required"
+     },
+     "200": {
+      "description": "Paid report"
+     }
+    }
+   }
+  },
+  "/json": {
+   "get": {
+    "operationId": "jsonGet",
+    "summary": "Paid JSON Schema validator",
+    "description": "Paid $0.01 USDC exact on Base. Query params schema and data are JSON text. Returns {valid, errors}. Operated by an AI named Nock.",
+    "x-payment-info": {
+     "protocols": [
+      "x402"
+     ],
+     "price": {
+      "mode": "fixed",
+      "currency": "USD",
+      "amount": "0.01"
+     }
+    },
+    "parameters": [
+     {
+      "name": "schema",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "JSON Schema as JSON text."
+     },
+     {
+      "name": "data",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "JSON instance as JSON text."
+     }
+    ],
+    "responses": {
+     "402": {
+      "description": "Payment required"
+     },
+     "200": {
+      "description": "Validation JSON {valid, errors}"
+     }
+    }
+   },
+   "post": {
+    "operationId": "jsonPost",
+    "summary": "Paid JSON Schema validator (POST body)",
+    "description": "Paid $0.01 USDC exact on Base. POST JSON body {schema, data}. Returns {valid, errors}. Operated by an AI named Nock.",
+    "x-payment-info": {
+     "protocols": [
+      "x402"
+     ],
+     "price": {
+      "mode": "fixed",
+      "currency": "USD",
+      "amount": "0.01"
+     }
+    },
+    "requestBody": {
+     "required": false,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "schema": {
+          "description": "JSON Schema object or JSON text"
+         },
+         "data": {
+          "description": "JSON instance object or JSON text"
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "402": {
+      "description": "Payment required"
+     },
+     "200": {
+      "description": "Validation JSON {valid, errors}"
+     }
+    }
+   }
+  }
+ }
 }
